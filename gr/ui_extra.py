@@ -515,10 +515,10 @@ class StatusPanel(tk.Frame):
             parts = list(Path(file).parts)
             for n in range(len(parts)-3):
                 parts.pop(len(parts)-2)
-                t = parts[0] + '\\'.join(parts[1:])
+                t = str(Path(*parts))
                 if f.measure(text + t) < maxw: break
-            file = parts[0] + '\\'.join(parts[1:-2])
-            file += '\\...\\' + parts[-1]
+            file = str(Path(*parts[:-2]))
+            file += Path('...', parts[-1]).as_posix()
 
         self.__var.set(text + " " + file)
 
